@@ -1,9 +1,9 @@
 import { Employee } from "@@domain/entities/Employee";
 
 export interface IEmployeeRepository {
-    findByEmail(email: string): Promise<Employee | null>;
-    findAll(): Promise<Employee[]>;
-    deleteByEmail(email: string): Promise<Employee>;
-    create(employee: Employee): Promise<Employee>;
-    update(employee: Employee): Promise<Employee>;
+    findByIdAsync(id: number): Promise<Employee | null>;
+    findAllAsync(): Promise<Employee[]>;
+    createAsync(employee: Employee): Promise<Employee>;
+    updateAsync(employee: Employee): Promise<void>;
+    deleteByIdAsync(id: number): Promise<void>;
 }
