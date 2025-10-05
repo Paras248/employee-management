@@ -1,7 +1,7 @@
-import { join } from "path";
-import sqlite3, { RunResult } from "sqlite3";
-import { existsSync, mkdirSync } from "fs";
-import { singleton } from "tsyringe";
+import { join } from 'path';
+import sqlite3, { RunResult } from 'sqlite3';
+import { existsSync, mkdirSync } from 'fs';
+import { singleton } from 'tsyringe';
 
 @singleton()
 export class DbConnectionService {
@@ -21,11 +21,11 @@ export class DbConnectionService {
     }
 
     private initializeDatabase(): sqlite3.Database {
-        const dbPath = join(process.cwd(), "db/");
+        const dbPath = join(process.cwd(), 'db/');
         if (!existsSync(dbPath)) {
             mkdirSync(dbPath, { recursive: true });
         }
-        return new sqlite3.Database(join(dbPath, "employees.db"));
+        return new sqlite3.Database(join(dbPath, 'employees.db'));
     }
 
     private createRunMethod() {
@@ -46,7 +46,7 @@ export class DbConnectionService {
         return () => {
             return new Promise<number>((resolve, reject) => {
                 this._connection.get(
-                    "SELECT last_insert_rowid() as id",
+                    'SELECT last_insert_rowid() as id',
                     [],
                     function (err, row: any) {
                         if (err) {

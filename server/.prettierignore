@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+coverage/
+
+# Logs
+logs/
+*.log
+
+# Database files
+*.db
+
+# Package files
+package-lock.json
+
+# Test files (optional - you might want to format these)
+# tests/
+
+# Generated files
+*.js.map
+*.d.ts

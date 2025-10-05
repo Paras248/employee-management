@@ -1,7 +1,7 @@
-import winston from "winston";
-import DailyRotateFile from "winston-daily-rotate-file";
-import { ILogger } from "@@domain/contracts/external-services/ILogger";
-import { singleton } from "tsyringe";
+import winston from 'winston';
+import DailyRotateFile from 'winston-daily-rotate-file';
+import { ILogger } from '@@domain/contracts/external-services/ILogger';
+import { singleton } from 'tsyringe';
 
 @singleton()
 export class WinstonLogger implements ILogger {
@@ -9,7 +9,7 @@ export class WinstonLogger implements ILogger {
 
     constructor() {
         this._logger = winston.createLogger({
-            level: "info",
+            level: 'info',
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.errors({ stack: true }),
@@ -25,20 +25,24 @@ export class WinstonLogger implements ILogger {
                 }),
                 // Daily rotate file transport for all logs
                 new DailyRotateFile({
-                    filename: "logs/app-%DATE%.log",
-                    datePattern: "YYYY-MM-DD",
-                    level: "info",
-                    maxFiles: "14d", // Keep logs for 14 days
+                    filename: 'logs/app-%DATE%.json',
+                    datePattern: 'YYYY-MM-DD',
+                    level: 'info',
+                    maxFiles: '14d', // Keep logs for 14 days
                 }),
             ],
         });
     }
 
-    info(message: string): void {
-        this._logger.info(message);
+    info(message: string, meta?: any): void {
+        this._logger.info(message, meta);
     }
 
-    error(message: string): void {
-        this._logger.error(message);
+    warn(message: string, meta?: any): void {
+        this._logger.warn(message, meta);
+    }
+
+    error(message: string, meta?: any): void {
+        this._logger.error(message, meta);
     }
 }

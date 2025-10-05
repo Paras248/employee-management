@@ -1,9 +1,9 @@
 export class ValidationException extends Error {
-    validationErrors: string[];
+    errors: string[];
 
-    constructor(validationErrors: string[] = []) {
-        super("Provided data is not valid");
-        this.validationErrors = validationErrors;
-        this.name = "ValidationException";
+    constructor(message: string, errors: string[] = []) {
+        super(message);
+        this.errors = errors;
+        this.name = 'ValidationException';
     }
 }

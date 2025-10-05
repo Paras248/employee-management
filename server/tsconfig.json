@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "target": "ES2022",
-        "module": "ESNext",
-        "moduleResolution": "bundler",
+        "module": "CommonJS",
+        "moduleResolution": "node",
         "lib": ["es2022"],
         "declaration": true,
         "strict": true,
@@ -23,8 +23,9 @@
             "@@application/*": ["src/core/application/*"],
             "@@presentation/*": ["src/presentation/*"],
             "@@domain/*": ["src/core/domain/*"]
-        }
+        },
+        "types": ["jest", "node"]
     },
-    "include": ["src/**/*.ts"],
+    "include": ["src/**/*.ts", "tests/**/*.ts"],
     "exclude": ["dist", "node_modules"]
 }
