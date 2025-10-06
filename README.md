@@ -60,6 +60,8 @@ Jest runs unit tests under `server/tests/**`.
 
 Why this structure: It enforces separation of concerns, testability, and the dependency rule (outer layers depend on inner abstractions, never the reverse). Each folder has a single responsibility and can be evolved independently.
 
+<img width="665" height="648" alt="cleanarch" src="https://github.com/user-attachments/assets/772a908c-0fc8-42a6-9e1b-26315e4f9a5c" />
+
 ```
 server/src/
   core/                                   # Application-agnostic business code
@@ -124,7 +126,7 @@ server/src/
 Key principles applied:
 
 -   Dependency inversion: presentation/infrastructure depend on application/domain abstractions; not vice versa.
--   Clear read/write separation: commands mutate state; queries only read.
+-   Clear read/write separation (CQRS Pattern): commands mutate state; queries only read.
 -   Controllers are thin: validate/transform request, invoke a single use-case, transform response.
 -   Repositories hide data layer details: swapping SQLite for another DB only touches infrastructure.
 -   Centralized error handling: domain/application exceptions mapped to HTTP statuses in one place.
