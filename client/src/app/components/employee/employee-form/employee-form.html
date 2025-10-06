@@ -1,0 +1,165 @@
+<div class="employee-form-container">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="employee-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Name *</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.error]="isFieldInvalid('name')"
+          formControlName="name"
+          placeholder="Enter full name"
+        />
+        <div *ngIf="isFieldInvalid('name')" class="error-message">
+          {{ getErrorMessage('name') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email *</label>
+        <input
+          type="email"
+          class="form-control"
+          [class.error]="isFieldInvalid('email')"
+          formControlName="email"
+          placeholder="Enter email address"
+        />
+        <div *ngIf="isFieldInvalid('email')" class="error-message">
+          {{ getErrorMessage('email') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Phone Number *</label>
+        <input
+          type="tel"
+          class="form-control"
+          [class.error]="isFieldInvalid('phoneNumber')"
+          formControlName="phoneNumber"
+          placeholder="Enter phone number"
+        />
+        <div *ngIf="isFieldInvalid('phoneNumber')" class="error-message">
+          {{ getErrorMessage('phoneNumber') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Gender *</label>
+        <select
+          class="form-control"
+          [class.error]="isFieldInvalid('gender')"
+          formControlName="gender"
+        >
+          <option value="">Select Gender</option>
+          <option *ngFor="let option of genderOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <div *ngIf="isFieldInvalid('gender')" class="error-message">
+          {{ getErrorMessage('gender') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Position *</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.error]="isFieldInvalid('position')"
+          formControlName="position"
+          placeholder="Enter job position"
+        />
+        <div *ngIf="isFieldInvalid('position')" class="error-message">
+          {{ getErrorMessage('position') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Department *</label>
+        <select
+          class="form-control"
+          [class.error]="isFieldInvalid('department')"
+          formControlName="department"
+        >
+          <option value="">Select Department</option>
+          <option *ngFor="let option of departmentOptions" [value]="option.value">
+            {{ option.label }}
+          </option>
+        </select>
+        <div *ngIf="isFieldInvalid('department')" class="error-message">
+          {{ getErrorMessage('department') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Date of Birth *</label>
+        <input
+          type="date"
+          class="form-control"
+          [class.error]="isFieldInvalid('dateOfBirth')"
+          formControlName="dateOfBirth"
+        />
+        <div *ngIf="isFieldInvalid('dateOfBirth')" class="error-message">
+          {{ getErrorMessage('dateOfBirth') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Hire Date *</label>
+        <input
+          type="date"
+          class="form-control"
+          [class.error]="isFieldInvalid('hireDate')"
+          formControlName="hireDate"
+        />
+        <div *ngIf="isFieldInvalid('hireDate')" class="error-message">
+          {{ getErrorMessage('hireDate') }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row" *ngIf="mode === 'edit'">
+      <div class="form-group">
+        <label class="form-label">Active Status</label>
+        <select class="form-control" formControlName="isActive">
+          <option [ngValue]="true">Active</option>
+          <option [ngValue]="false">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Address *</label>
+      <textarea
+        class="form-control"
+        [class.error]="isFieldInvalid('address')"
+        formControlName="address"
+        placeholder="Enter full address"
+        rows="3"
+      ></textarea>
+      <div *ngIf="isFieldInvalid('address')" class="error-message">
+        {{ getErrorMessage('address') }}
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()" [disabled]="loading">
+        Cancel
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span class="btn-label">{{ mode === 'create' ? 'Create' : 'Update' }}</span>
+        <span
+          *ngIf="loading"
+          class="spinner"
+          style="width: 16px; height: 16px; border-width: 2px; margin-left: 8px"
+        ></span>
+      </button>
+    </div>
+  </form>
+</div>

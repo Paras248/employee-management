@@ -33,17 +33,23 @@ describe('CreateEmployeeCommandHandler', () => {
             const result = await handler.handle(validCommand);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Creating new employee', {
-                name: 'John Doe',
-                email: 'john@example.com',
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'CreateEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    name: 'John Doe',
+                    email: 'john@example.com',
+                }
+            );
             expect(mockEmployeeRepository.findByEmailAsync).toHaveBeenCalledWith(
                 'john@example.com'
             );
             expect(mockEmployeeRepository.createAsync).toHaveBeenCalled();
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee created successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'CreateEmployeeCommandHandler-handle: Employee created successfully',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(result).toBeDefined();
         });
 
@@ -86,13 +92,19 @@ describe('CreateEmployeeCommandHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Creating new employee', {
-                name: 'John Doe',
-                email: 'john@example.com',
-            });
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee created successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'CreateEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    name: 'John Doe',
+                    email: 'john@example.com',
+                }
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'CreateEmployeeCommandHandler-handle: Employee created successfully',
+                {
+                    employeeId: 1,
+                }
+            );
         });
     });
 });

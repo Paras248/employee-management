@@ -12,6 +12,22 @@ export class EmployeeRepository implements IEmployeeRepository {
         @inject('ILogger') private logger: ILogger
     ) {}
 
+    private parseDbDate(value: any): Date {
+        if (value === null || value === undefined) return new Date(NaN);
+        if (typeof value === 'number') return new Date(value);
+        if (typeof value === 'string') {
+            const numeric = Number(value);
+            if (!Number.isNaN(numeric)) return new Date(numeric);
+            return new Date(value);
+        }
+        return new Date(value);
+    }
+
+    private formatDbDate(value: any): string {
+        const dt = this.parseDbDate(value);
+        return isNaN(dt.getTime()) ? new Date().toISOString() : dt.toISOString();
+    }
+
     async findByIdAsync(id: number): Promise<Employee | null> {
         this.logger.info('EmployeeRepository-findByIdAsync: Inside Handler', {
             id,
@@ -35,12 +51,12 @@ export class EmployeeRepository implements IEmployeeRepository {
             result.name,
             result.address,
             result.phoneNumber,
-            result.dateOfBirth,
+            this.parseDbDate(result.dateOfBirth),
             result.gender,
             result.position,
             result.department,
-            result.hireDate,
-            result.isActive
+            this.parseDbDate(result.hireDate),
+            typeof result.isActive === 'number' ? result.isActive === 1 : Boolean(result.isActive)
         );
     }
 
@@ -76,12 +92,12 @@ export class EmployeeRepository implements IEmployeeRepository {
             result.name,
             result.address,
             result.phoneNumber,
-            result.dateOfBirth,
+            this.parseDbDate(result.dateOfBirth),
             result.gender,
             result.position,
             result.department,
-            result.hireDate,
-            result.isActive
+            this.parseDbDate(result.hireDate),
+            typeof result.isActive === 'number' ? result.isActive === 1 : Boolean(result.isActive)
         );
     }
 
@@ -103,12 +119,14 @@ export class EmployeeRepository implements IEmployeeRepository {
                     result.name,
                     result.address,
                     result.phoneNumber,
-                    result.dateOfBirth,
+                    this.parseDbDate(result.dateOfBirth),
                     result.gender,
                     result.position,
                     result.department,
-                    result.hireDate,
-                    result.isActive
+                    this.parseDbDate(result.hireDate),
+                    typeof result.isActive === 'number'
+                        ? result.isActive === 1
+                        : Boolean(result.isActive)
                 )
         );
     }
@@ -134,12 +152,14 @@ export class EmployeeRepository implements IEmployeeRepository {
                     result.name,
                     result.address,
                     result.phoneNumber,
-                    result.dateOfBirth,
+                    this.parseDbDate(result.dateOfBirth),
                     result.gender,
                     result.position,
                     result.department,
-                    result.hireDate,
-                    result.isActive
+                    this.parseDbDate(result.hireDate),
+                    typeof result.isActive === 'number'
+                        ? result.isActive === 1
+                        : Boolean(result.isActive)
                 )
         );
     }
@@ -160,12 +180,12 @@ export class EmployeeRepository implements IEmployeeRepository {
             employee.name,
             employee.address,
             employee.phoneNumber,
-            employee.dateOfBirth,
+            this.formatDbDate(employee.dateOfBirth),
             employee.gender,
             employee.position,
             employee.department,
-            employee.hireDate,
-            employee.isActive,
+            this.formatDbDate(employee.hireDate),
+            employee.isActive ? 1 : 0,
         ]);
 
         const lastId = await this._db.lastId();
@@ -205,12 +225,12 @@ export class EmployeeRepository implements IEmployeeRepository {
             employee.name,
             employee.address,
             employee.phoneNumber,
-            employee.dateOfBirth,
+            this.formatDbDate(employee.dateOfBirth),
             employee.gender,
             employee.position,
             employee.department,
-            employee.hireDate,
-            employee.isActive,
+            this.formatDbDate(employee.hireDate),
+            employee.isActive ? 1 : 0,
             employee.id,
         ]);
 

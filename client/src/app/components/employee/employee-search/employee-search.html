@@ -1,0 +1,24 @@
+<div class="search-container">
+  <div class="search-field full">
+    <input
+      type="text"
+      class="form-control"
+      [formControl]="searchControl"
+      placeholder="Search employees by name"
+      (input)="onSearchInput()"
+    />
+    <div class="search-icon">🔍</div>
+    <button
+      *ngIf="searchControl.value"
+      class="clear-btn"
+      (click)="clearSearch()"
+      title="Clear search"
+    >
+      ×
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-indicator">
+    <div class="spinner"></div>
+  </div>
+</div>

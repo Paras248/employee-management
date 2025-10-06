@@ -1,0 +1,13 @@
+<div class="toast-container">
+  <div
+    *ngFor="let toast of toasts; let i = index"
+    [class]="getToastClass(toast)"
+    (click)="removeToast(toast)"
+  >
+    <div class="toast-icon">{{ getToastIcon(toast) }}</div>
+    <div class="toast-content">
+      <p class="toast-message">{{ toast.message }}</p>
+    </div>
+    <button class="toast-close" (click)="removeToast(toast)">×</button>
+  </div>
+</div>

@@ -22,14 +22,20 @@ describe('SearchEmployeesQueryHandler', () => {
             const result = await handler.handle(validQuery);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Searching employees', {
-                searchTerm: 'john',
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Inside Handler',
+                {
+                    searchTerm: 'john',
+                }
+            );
             expect(mockEmployeeRepository.searchByNameAsync).toHaveBeenCalledWith('john');
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee search completed', {
-                searchTerm: 'john',
-                resultsCount: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Employee search completed',
+                {
+                    searchTerm: 'john',
+                    resultsCount: 1,
+                }
+            );
             expect(result).toHaveLength(1);
             expect(result[0].name).toBe('John Doe');
         });
@@ -42,14 +48,20 @@ describe('SearchEmployeesQueryHandler', () => {
             const result = await handler.handle(validQuery);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Searching employees', {
-                searchTerm: 'john',
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Inside Handler',
+                {
+                    searchTerm: 'john',
+                }
+            );
             expect(mockEmployeeRepository.searchByNameAsync).toHaveBeenCalledWith('john');
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee search completed', {
-                searchTerm: 'john',
-                resultsCount: 0,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Employee search completed',
+                {
+                    searchTerm: 'john',
+                    resultsCount: 0,
+                }
+            );
             expect(result).toHaveLength(0);
         });
 
@@ -92,13 +104,19 @@ describe('SearchEmployeesQueryHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Searching employees', {
-                searchTerm: 'john',
-            });
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee search completed', {
-                searchTerm: 'john',
-                resultsCount: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Inside Handler',
+                {
+                    searchTerm: 'john',
+                }
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'SearchEmployeesQueryHandler-handle: Employee search completed',
+                {
+                    searchTerm: 'john',
+                    resultsCount: 1,
+                }
+            );
         });
 
         it('should handle repository errors gracefully', async () => {
@@ -126,14 +144,14 @@ describe('SearchEmployeesQueryHandler', () => {
                 email: 'john@example.com',
                 address: '123 Main St',
                 phoneNumber: '+1234567890',
-                dateOfBirth: new Date('1990-01-01'),
+                dateOfBirth: '1990-01-01T00:00:00.000Z',
                 gender: 'Male',
                 position: 'Developer',
                 department: 'Engineering',
-                hireDate: new Date('2020-01-01'),
+                hireDate: '2020-01-01T00:00:00.000Z',
                 isActive: true,
-                createdAt: new Date('2020-01-01'),
-                updatedAt: new Date('2020-01-01'),
+                createdAt: '2020-01-01T00:00:00.000Z',
+                updatedAt: '2020-01-01T00:00:00.000Z',
             });
         });
 

@@ -24,14 +24,20 @@ describe('DeleteEmployeeCommandHandler', () => {
             await handler.handle(validCommand);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Deleting employee', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'DeleteEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(mockEmployeeRepository.findByIdAsync).toHaveBeenCalledWith(1);
             expect(mockEmployeeRepository.deleteByIdAsync).toHaveBeenCalledWith(1);
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee deleted successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'DeleteEmployeeCommandHandler-handle: Employee deleted successfully',
+                {
+                    employeeId: 1,
+                }
+            );
         });
 
         it('should throw NotFoundException when employee does not exist', async () => {
@@ -63,12 +69,18 @@ describe('DeleteEmployeeCommandHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Deleting employee', {
-                employeeId: 1,
-            });
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee deleted successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'DeleteEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'DeleteEmployeeCommandHandler-handle: Employee deleted successfully',
+                {
+                    employeeId: 1,
+                }
+            );
         });
 
         it('should handle repository errors gracefully', async () => {

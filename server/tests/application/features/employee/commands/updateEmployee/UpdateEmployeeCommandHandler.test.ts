@@ -23,7 +23,8 @@ describe('UpdateEmployeeCommandHandler', () => {
             'Male',
             'Senior Developer',
             'Engineering',
-            new Date('2020-01-01')
+            new Date('2020-01-01'),
+            false
         );
 
         it('should update employee successfully when all data is valid', async () => {
@@ -37,14 +38,20 @@ describe('UpdateEmployeeCommandHandler', () => {
             const result = await handler.handle(validCommand);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Updating employee', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'UpdateEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(mockEmployeeRepository.findByIdAsync).toHaveBeenCalledWith(1);
             expect(mockEmployeeRepository.updateAsync).toHaveBeenCalled();
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee updated successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'UpdateEmployeeCommandHandler-handle: Employee updated successfully',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(result).toBeDefined();
         });
 
@@ -96,7 +103,8 @@ describe('UpdateEmployeeCommandHandler', () => {
                 'Invalid', // Invalid: not in enum
                 '', // Invalid: empty position
                 '', // Invalid: empty department
-                new Date('2030-01-01') // Invalid: future date
+                new Date('2030-01-01'), // Invalid: future date
+                null as unknown as boolean // Invalid: missing boolean
             );
 
             // Act & Assert
@@ -117,12 +125,18 @@ describe('UpdateEmployeeCommandHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Updating employee', {
-                employeeId: 1,
-            });
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee updated successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'UpdateEmployeeCommandHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'UpdateEmployeeCommandHandler-handle: Employee updated successfully',
+                {
+                    employeeId: 1,
+                }
+            );
         });
     });
 });

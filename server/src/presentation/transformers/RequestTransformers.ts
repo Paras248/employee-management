@@ -48,6 +48,7 @@ export class RequestTransformers {
             position,
             department,
             hireDate,
+            isActive,
         } = req.body;
         return new UpdateEmployeeCommand(
             id,
@@ -59,7 +60,8 @@ export class RequestTransformers {
             gender,
             position,
             department,
-            new Date(hireDate)
+            new Date(hireDate),
+            Boolean(isActive)
         );
     }
 

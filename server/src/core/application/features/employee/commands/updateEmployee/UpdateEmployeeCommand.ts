@@ -9,6 +9,7 @@ export class UpdateEmployeeCommand {
         public readonly gender: string,
         public readonly position: string,
         public readonly department: string,
-        public readonly hireDate: Date
+        public readonly hireDate: Date,
+        public readonly isActive: boolean
     ) {}
 }

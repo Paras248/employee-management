@@ -1,0 +1,123 @@
+<div class="employee-list-container">
+  <div class="header">
+    <h1>Employee Management</h1>
+    <button class="btn btn-primary" (click)="openCreateModal()">
+      <span>+</span>
+      Add Employee
+    </button>
+  </div>
+
+  <app-employee-search (searchResults)="onSearchResults($event)"></app-employee-search>
+
+  <div class="content">
+    <app-loader *ngIf="loading" message="Loading employees..."></app-loader>
+
+    <div *ngIf="!loading && employees.length === 0" class="no-data">
+      <div class="no-data-icon">👥</div>
+      <p>No employees found</p>
+    </div>
+
+    <div *ngIf="!loading && employees.length > 0" class="employee-cards">
+      <div *ngFor="let employee of employees" class="employee-card card">
+        <div class="card-header">
+          <div class="employee-header">
+            <h3 class="employee-name">{{ employee.name }}</h3>
+            <span
+              class="status-badge"
+              [ngClass]="{
+                'status-active': employee.isActive,
+                'status-inactive': !employee.isActive
+              }"
+            >
+              {{ employee.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="employee-info">
+            <div class="info-row">
+              <span class="label">Email:</span>
+              <span class="value">{{ employee.email }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Position:</span>
+              <span class="value">{{ employee.position }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Department:</span>
+              <span class="value">{{ employee.department }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Phone:</span>
+              <span class="value">{{ employee.phoneNumber }}</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Hire Date:</span>
+              <span class="value">{{ formatDate(employee.hireDate) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="employee-actions">
+            <button class="btn btn-secondary" (click)="openEditModal(employee)">Edit</button>
+            <button class="btn btn-danger" (click)="openConfirmDelete(employee)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div *ngIf="showModal" class="modal-overlay" (click)="closeModal()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">
+          {{ modalMode === 'create' ? 'Add New Employee' : 'Edit Employee' }}
+        </h2>
+        <button class="close-btn" (click)="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <app-employee-form
+          [mode]="modalMode"
+          [employee]="selectedEmployee"
+          (saved)="onEmployeeSaved()"
+          (cancelled)="closeModal()"
+        >
+        </app-employee-form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div *ngIf="confirmingEmployee" class="modal-overlay" (click)="cancelConfirmDelete()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirm Delete</h2>
+        <button class="close-btn" (click)="cancelConfirmDelete()">×</button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Are you sure you want to delete <strong>{{ confirmingEmployee.name }}</strong
+          >?
+        </p>
+      </div>
+      <div class="card-footer">
+        <div class="employee-actions">
+          <button class="btn btn-secondary" (click)="cancelConfirmDelete()">Cancel</button>
+          <button class="btn btn-danger" (click)="confirmDelete()">
+            <span
+              *ngIf="deletingId === confirmingEmployee?.id"
+              class="spinner"
+              style="width: 16px; height: 16px; border-width: 2px"
+            ></span>
+            <span *ngIf="deletingId !== confirmingEmployee?.id">Delete</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-toast></app-toast>
+</div>

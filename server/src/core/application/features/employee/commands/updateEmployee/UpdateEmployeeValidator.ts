@@ -52,6 +52,9 @@ export class UpdateEmployeeValidator {
             'date.max': 'Hire date cannot be in the future',
             'any.required': 'Hire date is required',
         }),
+        isActive: Joi.boolean().required().messages({
+            'any.required': 'isActive is required',
+        }),
     });
 
     static validate(command: UpdateEmployeeCommand): {

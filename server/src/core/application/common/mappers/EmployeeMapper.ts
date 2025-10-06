@@ -3,20 +3,21 @@ import { EmployeeDto } from '../dtos/EmployeeDto';
 
 export class EmployeeMapper {
     static toDto(employee: Employee): EmployeeDto {
+        const toIso = (d: any) => (d instanceof Date ? d.toISOString() : new Date(d).toISOString());
         return new EmployeeDto(
             employee.id,
             employee.name,
             employee.email,
             employee.address,
             employee.phoneNumber,
-            employee.dateOfBirth,
+            toIso(employee.dateOfBirth),
             employee.gender,
             employee.position,
             employee.department,
-            employee.hireDate,
-            employee.isActive,
-            employee.createdAt,
-            employee.updatedAt
+            toIso(employee.hireDate),
+            Boolean(employee.isActive),
+            toIso(employee.createdAt),
+            toIso(employee.updatedAt)
         );
     }
 

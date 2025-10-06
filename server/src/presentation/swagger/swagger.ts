@@ -228,9 +228,9 @@ const swaggerDefinition = {
                     },
                     dateOfBirth: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date of birth of the employee',
-                        example: '1990-01-15',
+                        format: 'date-time',
+                        description: 'Date of birth (ISO 8601)',
+                        example: '1990-01-15T00:00:00.000Z',
                     },
                     gender: {
                         type: 'string',
@@ -250,9 +250,9 @@ const swaggerDefinition = {
                     },
                     hireDate: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date when the employee was hired',
-                        example: '2020-01-15',
+                        format: 'date-time',
+                        description: 'Hire date (ISO 8601)',
+                        example: '2020-01-15T00:00:00.000Z',
                     },
                     isActive: {
                         type: 'boolean',
@@ -310,9 +310,9 @@ const swaggerDefinition = {
                     },
                     dateOfBirth: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date of birth of the employee',
-                        example: '1990-01-15',
+                        format: 'date-time',
+                        description: 'Date of birth (ISO 8601)',
+                        example: '1990-01-15T00:00:00.000Z',
                     },
                     gender: {
                         type: 'string',
@@ -332,9 +332,9 @@ const swaggerDefinition = {
                     },
                     hireDate: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date when the employee was hired',
-                        example: '2020-01-15',
+                        format: 'date-time',
+                        description: 'Hire date (ISO 8601)',
+                        example: '2020-01-15T00:00:00.000Z',
                     },
                 },
             },
@@ -350,6 +350,7 @@ const swaggerDefinition = {
                     'position',
                     'department',
                     'hireDate',
+                    'isActive',
                 ],
                 properties: {
                     name: {
@@ -375,9 +376,9 @@ const swaggerDefinition = {
                     },
                     dateOfBirth: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date of birth of the employee',
-                        example: '1990-01-15',
+                        format: 'date-time',
+                        description: 'Date of birth (ISO 8601)',
+                        example: '1990-01-15T00:00:00.000Z',
                     },
                     gender: {
                         type: 'string',
@@ -397,9 +398,14 @@ const swaggerDefinition = {
                     },
                     hireDate: {
                         type: 'string',
-                        format: 'date',
-                        description: 'Date when the employee was hired',
-                        example: '2020-01-15',
+                        format: 'date-time',
+                        description: 'Hire date (ISO 8601)',
+                        example: '2020-01-15T00:00:00.000Z',
+                    },
+                    isActive: {
+                        type: 'boolean',
+                        description: 'Whether the employee is active',
+                        example: true,
                     },
                 },
             },

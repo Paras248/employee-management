@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { Response as ApiResponse } from '@@application/responses/Response';
+import { Response as ApiResponse } from '@@presentation/responses/Response';
 
 export class ResponseTransformers {
     static success<T>(res: Response, message: string, data: T, statusCode: number = 200): void {

@@ -1,0 +1,6 @@
+<div class="loader-container" [class.overlay]="overlay" [class.compact]="compact">
+  <div class="loader" [class]="'loader-' + size">
+    <div class="spinner"></div>
+  </div>
+  <p class="loader-message" *ngIf="!compact && message">{{ message }}</p>
+</div>

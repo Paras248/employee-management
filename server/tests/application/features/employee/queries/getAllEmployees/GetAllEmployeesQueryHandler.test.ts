@@ -21,11 +21,16 @@ describe('GetAllEmployeesQueryHandler', () => {
             const result = await handler.handle(validQuery);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting all employees');
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: Inside Handler'
+            );
             expect(mockEmployeeRepository.findAllAsync).toHaveBeenCalled();
-            expect(mockLogger.info).toHaveBeenCalledWith('All employees retrieved successfully', {
-                count: 2,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: All employees retrieved successfully',
+                {
+                    count: 2,
+                }
+            );
             expect(result).toHaveLength(2);
             expect(result[0].id).toBe(1);
             expect(result[1].id).toBe(2);
@@ -39,11 +44,16 @@ describe('GetAllEmployeesQueryHandler', () => {
             const result = await handler.handle(validQuery);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting all employees');
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: Inside Handler'
+            );
             expect(mockEmployeeRepository.findAllAsync).toHaveBeenCalled();
-            expect(mockLogger.info).toHaveBeenCalledWith('All employees retrieved successfully', {
-                count: 0,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: All employees retrieved successfully',
+                {
+                    count: 0,
+                }
+            );
             expect(result).toHaveLength(0);
         });
 
@@ -56,10 +66,15 @@ describe('GetAllEmployeesQueryHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting all employees');
-            expect(mockLogger.info).toHaveBeenCalledWith('All employees retrieved successfully', {
-                count: 2,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: Inside Handler'
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetAllEmployeesQueryHandler-handle: All employees retrieved successfully',
+                {
+                    count: 2,
+                }
+            );
         });
 
         it('should handle repository errors gracefully', async () => {
@@ -86,14 +101,14 @@ describe('GetAllEmployeesQueryHandler', () => {
                 email: 'john@example.com',
                 address: '123 Main St',
                 phoneNumber: '+1234567890',
-                dateOfBirth: new Date('1990-01-01'),
+                dateOfBirth: '1990-01-01T00:00:00.000Z',
                 gender: 'Male',
                 position: 'Developer',
                 department: 'Engineering',
-                hireDate: new Date('2020-01-01'),
+                hireDate: '2020-01-01T00:00:00.000Z',
                 isActive: true,
-                createdAt: new Date('2020-01-01'),
-                updatedAt: new Date('2020-01-01'),
+                createdAt: '2020-01-01T00:00:00.000Z',
+                updatedAt: '2020-01-01T00:00:00.000Z',
             });
             expect(result[1]).toEqual({
                 id: 2,
@@ -101,14 +116,14 @@ describe('GetAllEmployeesQueryHandler', () => {
                 email: 'jane@example.com',
                 address: '456 Oak Ave',
                 phoneNumber: '+1234567891',
-                dateOfBirth: new Date('1992-05-15'),
+                dateOfBirth: '1992-05-15T00:00:00.000Z',
                 gender: 'Female',
                 position: 'Designer',
                 department: 'Design',
-                hireDate: new Date('2021-03-15'),
+                hireDate: '2021-03-15T00:00:00.000Z',
                 isActive: true,
-                createdAt: new Date('2021-03-15'),
-                updatedAt: new Date('2021-03-15'),
+                createdAt: '2021-03-15T00:00:00.000Z',
+                updatedAt: '2021-03-15T00:00:00.000Z',
             });
         });
     });

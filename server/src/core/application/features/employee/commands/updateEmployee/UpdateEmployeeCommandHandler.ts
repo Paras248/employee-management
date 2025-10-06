@@ -58,7 +58,7 @@ export class UpdateEmployeeCommandHandler {
             command.position,
             command.department,
             command.hireDate,
-            existingEmployee.isActive,
+            command.isActive,
             existingEmployee.createdAt,
             new Date() // updatedAt
         );

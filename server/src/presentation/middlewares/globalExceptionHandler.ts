@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { Response as ApiResponse } from '@@application/responses/Response';
+import { Response as ApiResponse } from '@@presentation/responses/Response';
 import { ValidationException } from '@@domain/exceptions/ValidationException';
 import { NotFoundException } from '@@domain/exceptions/NotFoundException';
 import { BadRequestException } from '@@domain/exceptions/BadRequestException';

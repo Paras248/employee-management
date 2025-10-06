@@ -22,13 +22,19 @@ describe('GetEmployeeQueryHandler', () => {
             const result = await handler.handle(validQuery);
 
             // Assert
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting employee', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetEmployeeQueryHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(mockEmployeeRepository.findByIdAsync).toHaveBeenCalledWith(1);
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee retrieved successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetEmployeeQueryHandler-handle: Employee retrieved successfully',
+                {
+                    employeeId: 1,
+                }
+            );
             expect(result).toBeDefined();
             expect(result.id).toBe(1);
             expect(result.name).toBe('John Doe');
@@ -41,9 +47,12 @@ describe('GetEmployeeQueryHandler', () => {
 
             // Act & Assert
             await expect(handler.handle(validQuery)).rejects.toThrow(NotFoundException);
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting employee', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetEmployeeQueryHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
         });
 
         it('should log appropriate messages during successful retrieval', async () => {
@@ -55,12 +64,18 @@ describe('GetEmployeeQueryHandler', () => {
 
             // Assert
             expect(mockLogger.info).toHaveBeenCalledTimes(2);
-            expect(mockLogger.info).toHaveBeenCalledWith('Getting employee', {
-                employeeId: 1,
-            });
-            expect(mockLogger.info).toHaveBeenCalledWith('Employee retrieved successfully', {
-                employeeId: 1,
-            });
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetEmployeeQueryHandler-handle: Inside Handler',
+                {
+                    employeeId: 1,
+                }
+            );
+            expect(mockLogger.info).toHaveBeenCalledWith(
+                'GetEmployeeQueryHandler-handle: Employee retrieved successfully',
+                {
+                    employeeId: 1,
+                }
+            );
         });
 
         it('should handle repository errors gracefully', async () => {
@@ -86,14 +101,14 @@ describe('GetEmployeeQueryHandler', () => {
                 email: 'john@example.com',
                 address: '123 Main St',
                 phoneNumber: '+1234567890',
-                dateOfBirth: new Date('1990-01-01'),
+                dateOfBirth: '1990-01-01T00:00:00.000Z',
                 gender: 'Male',
                 position: 'Developer',
                 department: 'Engineering',
-                hireDate: new Date('2020-01-01'),
+                hireDate: '2020-01-01T00:00:00.000Z',
                 isActive: true,
-                createdAt: new Date('2020-01-01'),
-                updatedAt: new Date('2020-01-01'),
+                createdAt: '2020-01-01T00:00:00.000Z',
+                updatedAt: '2020-01-01T00:00:00.000Z',
             });
         });
     });
